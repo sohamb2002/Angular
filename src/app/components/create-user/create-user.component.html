@@ -1,0 +1,55 @@
+<div class="create-user-container">
+    <h2>Create New User</h2>
+    
+    <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Name Field -->
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" />
+        <div *ngIf="f['name']?.touched && f['name']?.invalid" class="error">
+          Name is required and should have at least 3 characters.
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="f['email']?.touched && f['email']?.invalid" class="error">
+          Please enter a valid email.
+        </div>
+      </div>
+  
+      <!-- Phone Field -->
+      <div class="form-field">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" formControlName="phone" />
+        <div *ngIf="f['phone']?.touched && f['phone']?.invalid" class="error">
+          Please enter a valid 10-digit phone number.
+        </div>
+      </div>
+  
+      <!-- Password Field -->
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <div *ngIf="f['password']?.touched && f['password']?.invalid" class="error">
+          Password is required and should have at least 6 characters.
+        </div>
+      </div>
+  
+      <!-- Active Checkbox -->
+      <div class="form-field">
+        <label for="isActive">Active</label>
+        <input type="checkbox" id="isActive" formControlName="isActive" />
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button type="submit" [disabled]="createUserForm.invalid">Create User</button>
+      </div>
+    
+    </form>
+  </div>
+  

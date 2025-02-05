@@ -1,0 +1,28 @@
+<div class="user-container">
+    <h2>User List</h2>
+  
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userItem of user">
+          <td>{{ userItem.id }}</td>
+          <td>{{ userItem.name }}</td>
+          <td>{{ userItem.email }}</td>
+          <td>{{ userItem.phone }}</td>
+          <td [class.active]="userItem.isActive" [class.inactive]="!userItem.isActive">
+            {{ userItem.isActive ? 'Active' : 'Inactive' }}
+          </td>
+          <td>{{ userItem.createdAt | date:'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
