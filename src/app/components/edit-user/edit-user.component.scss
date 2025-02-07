@@ -1,0 +1,189 @@
+// /* edit-user.component.scss */
+
+// /* Container for the edit user form */
+// .edit-user-container {
+//     margin: 2rem auto;
+//     max-width: 800px;
+//     padding: 1.5rem;
+//     background-color: #f9f9f9;
+//     border-radius: 8px;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+//     h2 {
+//       font-size: 2rem;
+//       margin-bottom: 1.5rem;
+//       text-align: center;
+//       color: #333;
+//     }
+  
+//     .p-grid {
+//       display: grid;
+//       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+//       gap: 1rem;
+//     }
+  
+//     .p-field {
+//       margin-bottom: 1rem;
+//     }
+  
+//     label {
+//       font-size: 1rem;
+//       color: #333;
+//       margin-bottom: 0.5rem;
+//       display: block;
+//     }
+  
+//     /* Input fields */
+//     input,
+//     p-password,
+//     p-checkbox {
+//       width: 100%;
+//       padding: 0.8rem;
+//       border: 1px solid #ccc;
+//       border-radius: 4px;
+//       font-size: 1rem;
+//       background-color: #fff;
+//       transition: all 0.3s ease;
+//     }
+  
+//     input:focus,
+//     p-password:focus,
+//     p-checkbox:focus {
+//       outline: none;
+//       border-color: #007bff;
+//     }
+  
+//     /* Error message styling */
+//     .p-message {
+//       margin-top: 0.5rem;
+//     }
+  
+//     /* Submit button styling */
+//     button {
+//       width: 100%;
+//       padding: 0.8rem;
+//       background-color: #28a745;
+//       color: #fff;
+//       font-size: 1rem;
+//       border: none;
+//       border-radius: 4px;
+//       cursor: pointer;
+//       transition: all 0.3s ease;
+//     }
+  
+//     button:disabled {
+//       background-color: #ccc;
+//     }
+  
+//     button:hover:enabled {
+//       background-color: #218838;
+//     }
+  
+//     /* Adjustments for smaller screens */
+//     @media (max-width: 768px) {
+//       .p-grid {
+//         grid-template-columns: 1fr;
+//       }
+//     }
+//   }
+.edit-user-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-user-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .p-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .p-field {
+    margin-bottom: 15px;
+  }
+  
+  .p-field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  input, p-password, p-checkbox {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  input:focus, p-password:focus, p-checkbox:focus {
+    outline: none;
+    border-color: #4caf50;
+  }
+  
+  .p-message {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .p-message.severity-error {
+    color: #f44336;
+  }
+  
+  button.p-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  button.p-button:disabled {
+    background-color: #b3e6b3;
+    cursor: not-allowed;
+  }
+  
+  button.p-button:hover {
+    background-color: #45a049;
+  }
+  
+  .p-checkbox {
+    margin-top: 10px;
+  }
+  
+  .p-checkbox .p-checkbox-box {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+  
+  .p-checkbox .p-checkbox-box.p-highlight {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  .p-checkbox .p-checkbox-icon {
+    color: #fff;
+  }
+  

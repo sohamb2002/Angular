@@ -1,28 +1,42 @@
 <div class="user-container">
-    <h2>User List</h2>
+  <h2>User List</h2>
+
+  <!-- PrimeNG Table -->
+  <p-table [value]="user" [responsive]="true" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-userItem>
+      <tr>
+        <td>{{ userItem.id }}</td>
+        <td>{{ userItem.name }}</td>
+        <td>{{ userItem.email }}</td>
+        <td>{{ userItem.phone }}</td>
+        <td [ngClass]="{'active': userItem.isActive, 'inactive': !userItem.isActive}">
+          {{ userItem.isActive ? 'Active' : 'Inactive' }}
+        </td>
+        <td>{{ userItem.createdAt | date:'medium' }}</td>
+        <td>
+         
+          <button pButton type="button" label="Edit" icon="pi pi-pencil" 
+          class="p-button-sm p-button-primary p-mr-2" (click)="onEdit(userItem)">
+  </button>
   
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Status</th>
-          <th>Created At</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let userItem of user">
-          <td>{{ userItem.id }}</td>
-          <td>{{ userItem.name }}</td>
-          <td>{{ userItem.email }}</td>
-          <td>{{ userItem.phone }}</td>
-          <td [class.active]="userItem.isActive" [class.inactive]="!userItem.isActive">
-            {{ userItem.isActive ? 'Active' : 'Inactive' }}
-          </td>
-          <td>{{ userItem.createdAt | date:'medium' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <button pButton type="button" label="Delete" icon="pi pi-trash" 
+          class="p-button-sm p-button-danger" (click)="onDelete(userItem)">
+  </button>
+  
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

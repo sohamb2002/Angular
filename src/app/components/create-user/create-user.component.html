@@ -1,55 +1,68 @@
 <div class="create-user-container">
-    <h2>Create New User</h2>
+  <h2>Create New User</h2>
+  
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
     
-    <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <div class="p-grid">
       
       <!-- Name Field -->
-      <div class="form-field">
+      <div class="p-field p-col-12 p-md-6">
         <label for="name">Name</label>
-        <input type="text" id="name" formControlName="name" />
-        <div *ngIf="f['name']?.touched && f['name']?.invalid" class="error">
+        <input pInputText type="text" id="name" formControlName="name" />
+        <p-message *ngIf="f['name']?.touched && f['name']?.invalid" severity="error">
           Name is required and should have at least 3 characters.
-        </div>
+        </p-message>
       </div>
   
       <!-- Email Field -->
-      <div class="form-field">
+      <div class="p-field p-col-12 p-md-6">
         <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" />
-        <div *ngIf="f['email']?.touched && f['email']?.invalid" class="error">
+        <input pInputText type="email" id="email" formControlName="email" />
+        <p-message *ngIf="f['email']?.touched && f['email']?.invalid" severity="error">
           Please enter a valid email.
-        </div>
+        </p-message>
       </div>
   
       <!-- Phone Field -->
-      <div class="form-field">
+      <div class="p-field p-col-12 p-md-6">
         <label for="phone">Phone</label>
-        <input type="text" id="phone" formControlName="phone" />
-        <div *ngIf="f['phone']?.touched && f['phone']?.invalid" class="error">
+        <!-- <input pInputText type="integeronly" id="phone" formControlName="phone" /> -->
+        <input 
+        pInputText 
+        type="text"
+        maxlength="10" 
+        id="phone" 
+        formControlName="phone" 
+        (keypress)="allowOnlyNumbers($event)" 
+        pattern="[0-9]*"
+        inputmode="numeric"
+      />
+        <p-message *ngIf="f['phone']?.touched && f['phone']?.invalid" severity="error">
           Please enter a valid 10-digit phone number.
-        </div>
+        </p-message>
       </div>
   
       <!-- Password Field -->
-      <div class="form-field">
+      <div class="p-field p-col-12 p-md-6">
         <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" />
-        <div *ngIf="f['password']?.touched && f['password']?.invalid" class="error">
+        <p-password id="password" formControlName="password" toggleMask></p-password>
+        <p-message *ngIf="f['password']?.touched && f['password']?.invalid" severity="error">
           Password is required and should have at least 6 characters.
-        </div>
+        </p-message>
       </div>
   
       <!-- Active Checkbox -->
-      <div class="form-field">
+      <div class="p-field p-col-12">
         <label for="isActive">Active</label>
-        <input type="checkbox" id="isActive" formControlName="isActive" />
+        <p-checkbox id="isActive" formControlName="isActive" binary="true"></p-checkbox>
       </div>
   
       <!-- Submit Button -->
-      <div class="form-actions">
-        <button type="submit" [disabled]="createUserForm.invalid">Create User</button>
+      <div class="p-field p-col-12">
+        <button pButton type="submit" label="Create User" class="p-button-success" [disabled]="createUserForm.invalid"></button>
       </div>
-    
-    </form>
-  </div>
+      
+    </div>
   
+  </form>
+</div>

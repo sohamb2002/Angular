@@ -1,0 +1,12 @@
+.p-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 16px; /* Adjust the gap between cards */
+  }
+  
+  .p-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  

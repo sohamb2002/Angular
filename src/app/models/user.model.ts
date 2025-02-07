@@ -10,7 +10,7 @@ export interface AddUserResponse {
     email: string;
     phone: string;
     password: string;
-    isActive: boolean;  // Ensure the casing matches (isActive, not isactive)
+    IsActive: boolean;  // Ensure the casing matches (isActive, not isactive)
   }
   
   export interface User {
@@ -18,7 +18,7 @@ export interface AddUserResponse {
     name: string;
     email: string;
     phone: string;
-    isActive: boolean;
+    IsActive: boolean;
     createdAt: string;
   }
   

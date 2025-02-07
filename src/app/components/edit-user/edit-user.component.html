@@ -1,0 +1,53 @@
+<div class="edit-user-container">
+  <h2>Edit User</h2>
+
+  <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+      <div class="p-grid">
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="name">Name</label>
+              <input pInputText type="text" id="name" formControlName="name" />
+              <p-message *ngIf="editUserForm.get('name')?.touched && editUserForm.get('name')?.invalid" severity="error">
+                  Name is required and should have at least 3 characters.
+              </p-message>
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="email">Email</label>
+              <input pInputText type="email" id="email" formControlName="email" />
+              <p-message *ngIf="editUserForm.get('email')?.touched && editUserForm.get('email')?.invalid" severity="error">
+                  Please enter a valid email.
+              </p-message>
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="phone">Phone</label>
+              <input pInputText type="integerOnly" id="phone" formControlName="phone" />
+              <p-message *ngIf="editUserForm.get('phone')?.touched && editUserForm.get('phone')?.invalid" severity="error">
+                  Please enter a valid 10-digit phone number.
+              </p-message>
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="password">Password</label>
+              <p-password id="password" formControlName="password" toggleMask></p-password>
+              <p-message *ngIf="editUserForm.get('password')?.touched && editUserForm.get('password')?.invalid" severity="error">
+                  Password is required and should have at least 6 characters.
+              </p-message>
+          </div>
+
+          <div class="p-field p-col-12">
+              <label for="isActive">Active</label>
+              <p-checkbox id="isActive" formControlName="isActive" binary="true"></p-checkbox>
+              <p-message *ngIf="editUserForm.get('isActive')?.touched && editUserForm.get('isActive')?.invalid" severity="error">
+                Active status is required.
+            </p-message>
+          </div>
+
+          <div class="p-field p-col-12">
+              <button pButton type="submit" label="Update User" class="p-button-success" [disabled]="editUserForm.invalid"></button>
+          </div>
+
+      </div>
+  </form>
+</div>

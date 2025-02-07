@@ -1,1 +1,38 @@
-<p>post works!</p>
+<div class="button-container">
+  <button pButton type="button" label="Show Published Posts" icon="pi pi-pencil" 
+          class="p-button-sm p-button-primary p-mr-2" (click)="fetchPublishedPosts()">
+  </button>
+
+  <button pButton type="button" label="Show All Posts" icon="pi pi-trash" 
+          class="p-button-sm p-button-danger p-mr-2" (click)="fetchPosts()">
+  </button>
+
+  <!-- Button to Open Create Post Dialog -->
+  <button pButton type="button" label="Create Post" icon="pi pi-plus" 
+          class="p-button-sm p-button-success" (click)="Create('create')">
+  </button>
+</div>
+
+<div class="mb-4 p-8">
+  <div class="p-grid">
+    <div *ngFor="let post of posts" class="p-col-12 p-md-4">
+      <p-card [style]="{ width: '100%', overflow: 'hidden' }">
+        <ng-template pTemplate="header">
+          <img
+            alt="Card"
+            class="w-full"
+            [src]="'https://primefaces.org/cdn/primeng/images/card-ng.jpg'"
+          />
+        </ng-template>
+        <ng-template pTemplate="title">{{ post.title }}</ng-template>
+        <p>{{ post.description }}</p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-4 mt-1">
+            <p-button label="Edit" severity="info" [outlined]="true" (click)="Create('edit', post.id)"></p-button>
+            <p-button label="Delete" severity="danger" [outlined]="true" (click)="Delete(post)"></p-button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

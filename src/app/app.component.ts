@@ -4,11 +4,13 @@ import { UserComponent } from './components/user/user.component';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,UserComponent,MenubarModule,RouterLink,RouterLinkActive],
+  imports: [RouterOutlet,UserComponent,MenubarModule,RouterLink,RouterLinkActive,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -24,8 +26,8 @@ export class AppComponent implements OnInit {
       this.items = [
           {
               label: 'Home',
-              icon: 'pi pi-home'
-
+              icon: 'pi pi-home',
+              routerLink: ['/']
           },
           {
             label: 'Create-User',
@@ -35,7 +37,8 @@ export class AppComponent implements OnInit {
 
         },
           {
-            label: '<b>User View</b>',
+            label: 'Users',
+            icon: "pi pi-user",
             escape: false,
             routerLink: ['/User']
           },
@@ -72,8 +75,10 @@ export class AppComponent implements OnInit {
               ]
           },
           {
-              label: 'Contact',
-              icon: 'pi pi-envelope'
+              label: 'Posts',
+              icon: 'pi pi-envelope',
+              escape: false,
+              routerLink: ['/Posts']
           }
       ]
   }}

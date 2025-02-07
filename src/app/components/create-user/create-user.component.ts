@@ -5,20 +5,32 @@ import { UserService } from '../../services/user-service.service';
 import { Users } from '../../models/user.model';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-create-user',
   standalone: true,
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss'],
-  imports: [ReactiveFormsModule,CommonModule,HttpClientModule] ,
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,
+    CheckboxModule,
+    ButtonModule,
+    InputTextModule,
+    PasswordModule,
+    MessageModule
+  ],
   providers: [UserService]
-   // Import ReactiveFormsModule here
 })
 export class CreateUserComponent implements OnInit {
-
   createUserForm!: FormGroup;
-
+   i:number=0;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -40,11 +52,10 @@ export class CreateUserComponent implements OnInit {
       return;
     }
 
-    // Send form values to the service
     this.userService.AddUser(this.createUserForm.value).subscribe(
       (response: Users) => {
         console.log('User created successfully', response);
-        this.router.navigate(['/User']); // Redirect after successful user creation
+        this.router.navigate(['/User']);
       },
       (error) => {
         console.error('Error creating user', error);
@@ -54,5 +65,21 @@ export class CreateUserComponent implements OnInit {
 
   get f() {
     return this.createUserForm.controls;
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent): void {
+
+   this.i++;
+   console.log(this.i);
+   
+if(this.i>=10)
+{
+  const charCode = event.which ? event.which : event.keyCode;
+  if (charCode < 48 || charCode > 57) {
+    event.preventDefault();
+  }
+}
+    
+    
   }
 }

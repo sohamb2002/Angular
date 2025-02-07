@@ -1,0 +1,19 @@
+<!-- create-edit.component.html -->
+<div>
+    <h2>{{ mode === 'create' ? 'Create New Post' : 'Edit Post' }}</h2>
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="title">Title</label>
+        <input id="title" formControlName="title" />
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+      <div>
+        <label for="isPublished">Publish</label>
+        <input id="isPublished" type="checkbox" formControlName="isPublished" />
+      </div>
+      <button type="submit">{{ mode === 'create' ? 'Create' : 'Update' }}</button>
+    </form>
+  </div>
