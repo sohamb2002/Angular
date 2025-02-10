@@ -1,38 +1,62 @@
-<div class="button-container">
-  <button pButton type="button" label="Show Published Posts" icon="pi pi-pencil" 
-          class="p-button-sm p-button-primary p-mr-2" (click)="fetchPublishedPosts()">
+<div class="button-container flex gap-3">
+  <button pButton type="button" label="Show Published Posts" icon="pi pi-eye" 
+          class="p-button-sm p-button-primary" (click)="fetchPublishedPosts()">
   </button>
 
-  <button pButton type="button" label="Show All Posts" icon="pi pi-trash" 
-          class="p-button-sm p-button-danger p-mr-2" (click)="fetchPosts()">
+  <button pButton type="button" label="Show All Posts" icon="pi pi-list" 
+          class="p-button-sm p-button-danger" (click)="fetchPosts()">
   </button>
 
-  <!-- Button to Open Create Post Dialog -->
   <button pButton type="button" label="Create Post" icon="pi pi-plus" 
-          class="p-button-sm p-button-success" (click)="Create('create')">
+          class="p-button-sm p-button-success" (click)="openCreateDialog()">
   </button>
+
+  <!-- Category Filter Dropdown -->
+  <p-dropdown
+    [options]="categories"
+    placeholder="Select Category"
+    (onChange)="fetchPostsByCategory($event.value)">
+  </p-dropdown>
+</div>
+
+<!-- Search Bar -->
+<div class="p-mt-3">
+  <input type="text" pInputText [(ngModel)]="searchQuery" placeholder="Search posts..." class="p-inputtext p-mb-3 w-full" />
 </div>
 
 <div class="mb-4 p-8">
   <div class="p-grid">
-    <div *ngFor="let post of posts" class="p-col-12 p-md-4">
+    <div *ngFor="let post of filteredPosts" class="p-col-12 p-md-4">
       <p-card [style]="{ width: '100%', overflow: 'hidden' }">
         <ng-template pTemplate="header">
           <img
             alt="Card"
             class="w-full"
-            [src]="'https://primefaces.org/cdn/primeng/images/card-ng.jpg'"
-          />
+            [src]="'https://primefaces.org/cdn/primeng/images/card-ng.jpg'"/>
         </ng-template>
+        
         <ng-template pTemplate="title">{{ post.title }}</ng-template>
         <p>{{ post.description }}</p>
+
+        <!-- Created At (Yellow) -->
+        <p-tag severity="warning" [value]="'Created: ' + (post.createdDate | date: 'medium')"></p-tag>
+
+        <!-- Updated At (Blue) -->
+        <p-tag severity="info" [value]="'Updated: ' + (post.updatedAt ? (post.updatedAt | date: 'medium') : 'Not Updated')"></p-tag>
+
+        <!-- Dynamic Severity Based on Publish Status -->
+        <p-tag 
+          [severity]="post.isPublished ? 'success' : 'danger'" 
+          [value]="post.isPublished ? 'Published' : 'Not Published'">
+        </p-tag>
+
         <ng-template pTemplate="footer">
           <div class="flex gap-4 mt-1">
-            <p-button label="Edit" severity="info" [outlined]="true" (click)="Create('edit', post.id)"></p-button>
+            <p-button label="Edit" severity="info" [outlined]="true" (click)="openEditDialog(post.id)"></p-button>
             <p-button label="Delete" severity="danger" [outlined]="true" (click)="Delete(post)"></p-button>
           </div>
         </ng-template>
       </p-card>
     </div>
   </div>
-</div>
+</div>  

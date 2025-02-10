@@ -30,7 +30,7 @@ export const routes: Routes = [
  {
   path: 'editPost/:id',
   component: CreateEditComponent
- }
-
+ },
+ { path: 'posts/:cat_id', component: PostComponent },
   
 ];

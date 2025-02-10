@@ -10,6 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { MessageModule } from 'primeng/message';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+
 
 @Component({
   selector: 'app-create-user',
@@ -24,7 +26,8 @@ import { MessageModule } from 'primeng/message';
     ButtonModule,
     InputTextModule,
     PasswordModule,
-    MessageModule
+    MessageModule,
+    DynamicDialogModule
   ],
   providers: [UserService]
 })
@@ -45,7 +48,13 @@ export class CreateUserComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       isActive: [true]
     });
+  
+    // Ensure the form starts as blank
+    console.log('Form before reset:', this.createUserForm.value);
+    this.createUserForm.reset();
+    console.log('Form after reset:', this.createUserForm.value);
   }
+  
 
   onSubmit() {
     if (this.createUserForm.invalid) {

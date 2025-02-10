@@ -1,19 +1,35 @@
-<!-- create-edit.component.html -->
 <div>
-    <h2>{{ mode === 'create' ? 'Create New Post' : 'Edit Post' }}</h2>
-    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="title">Title</label>
-        <input id="title" formControlName="title" />
-      </div>
-      <div>
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description"></textarea>
-      </div>
-      <div>
-        <label for="isPublished">Publish</label>
-        <input id="isPublished" type="checkbox" formControlName="isPublished" />
-      </div>
-      <button type="submit">{{ mode === 'create' ? 'Create' : 'Update' }}</button>
-    </form>
-  </div>
+  <h2>{{ mode === 'create' ? 'Create New Post' : 'Edit Post' }}</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" />
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <div>
+      <label for="isPublished">Publish</label>
+      <input id="isPublished" type="checkbox" formControlName="isPublished" />
+    </div>
+    <!-- Conditionally render the category dropdown for create mode -->
+    <div *ngIf="mode === 'create'">
+      <label for="categoryId">Category</label>
+      <select id="categoryId" formControlName="categoryId">
+        <option *ngFor="let category of categories" [value]="category.value">
+          {{ category.label }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label>Created At:</label>
+      <input type="text" [value]="postForm.value.createdDate | date:'short'" disabled />
+    </div>
+    <div>
+      <label>Updated At:</label>
+      <input type="text" [value]="postForm.value.updatedAt | date:'short'" disabled />
+    </div>
+    <button type="submit">{{ mode === 'create' ? 'Create' : 'Update' }}</button>
+  </form>
+</div>

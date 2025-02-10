@@ -13,6 +13,8 @@ export interface Post {
     createdBy: number;
     createdDate: string;
     isPublished: boolean;
+    isDeleted: boolean;
+    updatedAt: string;
   }
   
 

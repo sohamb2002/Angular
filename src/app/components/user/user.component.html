@@ -1,8 +1,21 @@
 <div class="user-container">
   <h2>User List</h2>
 
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchText" placeholder="Search by name or email" (input)="onSearch()" />
+  </div>
+
+  <!-- Toggle Buttons -->
+  <div class="toggle-buttons">
+    <button pButton type="button" label="Show All Users" class="p-button-sm p-button-secondary" 
+            (click)="toggleUserView()" *ngIf="!showAllUsers"></button>
+    <button pButton type="button" label="Show Active Users" class="p-button-sm p-button-secondary" 
+            (click)="toggleUserView()" *ngIf="showAllUsers"></button>
+  </div>
+
   <!-- PrimeNG Table -->
-  <p-table [value]="user" [responsive]="true" [paginator]="true" [rows]="10">
+  <p-table [value]="filteredUsers" [responsive]="true" [paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
       <tr>
         <th>ID</th>
@@ -21,20 +34,20 @@
         <td>{{ userItem.name }}</td>
         <td>{{ userItem.email }}</td>
         <td>{{ userItem.phone }}</td>
-        <td [ngClass]="{'active': userItem.isActive, 'inactive': !userItem.isActive}">
-          {{ userItem.isActive ? 'Active' : 'Inactive' }}
+        <td>
+          <p-tag [severity]="userItem.isActive ? 'success' : 'danger'" 
+                 [value]="userItem.isActive ? 'Active' : 'Inactive'">
+          </p-tag>
         </td>
         <td>{{ userItem.createdAt | date:'medium' }}</td>
         <td>
-         
-          <button pButton type="button" label="Edit" icon="pi pi-pencil" 
-          class="p-button-sm p-button-primary p-mr-2" (click)="onEdit(userItem)">
-  </button>
-  
-  <button pButton type="button" label="Delete" icon="pi pi-trash" 
-          class="p-button-sm p-button-danger" (click)="onDelete(userItem)">
-  </button>
-  
+          <div class="button-container">
+            <button pButton type="button" label="Edit" icon="pi pi-pencil" 
+                    class="p-button-sm p-button-primary" (click)="onEdit(userItem)"></button>
+        
+            <button pButton type="button" label="Delete" icon="pi pi-trash" 
+                    class="p-button-sm p-button-danger" (click)="onDelete(userItem)"></button>
+          </div>
         </td>
       </tr>
     </ng-template>

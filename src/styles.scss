@@ -1,2 +1,16 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('/assets/blog.png') no-repeat center center/cover;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9); /* Light transparency for readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

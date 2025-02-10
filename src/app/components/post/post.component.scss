@@ -1,12 +1,154 @@
+/* BUTTON CONTAINER */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-container button {
+  flex: 1;
+  min-width: 180px;
+  max-width: 250px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* CATEGORY DROPDOWN */
+p-dropdown {
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #fff;
+  padding: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* CARD LAYOUT */
+.mb-4.p-8 {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
 .p-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-    gap: 16px; /* Adjust the gap between cards */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* CARD STYLING */
+.p-card {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  background: #ffffff;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+  border: 1px solid #e0e0e0;
+}
+
+.p-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* CARD IMAGE */
+.p-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.p-card img:hover {
+  opacity: 0.9;
+}
+
+/* TAG STYLING */
+.p-tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Created At (Yellow) */
+.p-tag-warning {
+  background-color: #facc15;
+  color: #5a3b00;
+}
+
+/* Updated At (Blue) */
+.p-tag-info {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* PUBLISHED STATUS */
+.p-tag-success {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+
+.p-tag-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* FOOTER BUTTONS */
+.flex.gap-4 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.flex.gap-4 p-button {
+  flex: 1;
+  max-width: 120px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.flex.gap-4 p-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
+
+  .p-grid {
+    grid-template-columns: 1fr;
   }
   
   .p-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    padding: 16px;
   }
-  
+}

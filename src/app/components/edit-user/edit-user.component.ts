@@ -62,14 +62,20 @@ export class EditUserComponent implements OnInit {
 
   loadUserData(id: number): void {
     this.userService.GetUserById(id).subscribe(
-      (user: any) => {
-        console.log('User data:', user);
-        this.editUserForm.patchValue({
+      (response: any) => {
+        console.log('User data:', response); // Check the actual response
+  
+      
+  
+        const user = response.data;
+  
+       
+        this.editUserForm.setValue({
           name: user.name || '',
           email: user.email || '',
           phone: user.phone || '',
-          password: '',  // Keep password empty for security
-          isActive: user.IsActive ?? false, // Default to false if undefined
+          password: '',  
+          isActive: user.isActive ?? false 
         });
       },
       (error) => {

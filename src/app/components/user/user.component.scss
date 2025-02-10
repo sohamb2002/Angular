@@ -8,6 +8,17 @@
 //   h2 {
 //     color: #333;
 //   }
+h2{
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+  
+}
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust space between buttons */
+}
+
   
 //   .user-table {
 //     width: 100%;
@@ -40,4 +51,25 @@
 //     color: red;
 //     font-weight: bold;
 //   }
+.user-container {
+    padding: 20px;
   
+    .search-bar {
+      margin-bottom: 20px;
+  
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+  
+    .toggle-buttons {
+      margin-bottom: 20px;
+  
+      button {
+        margin-right: 10px;
+      }
+    }
+  }

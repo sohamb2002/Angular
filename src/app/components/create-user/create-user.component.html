@@ -43,13 +43,20 @@
       </div>
   
       <!-- Password Field -->
+ 
       <div class="p-field p-col-12 p-md-6">
         <label for="password">Password</label>
-        <p-password id="password" formControlName="password" toggleMask></p-password>
+        <p-password 
+          id="password" 
+          formControlName="password" 
+          [feedback]="false" 
+          [toggleMask]="true">
+        </p-password>
         <p-message *ngIf="f['password']?.touched && f['password']?.invalid" severity="error">
           Password is required and should have at least 6 characters.
         </p-message>
       </div>
+
   
       <!-- Active Checkbox -->
       <div class="p-field p-col-12">
