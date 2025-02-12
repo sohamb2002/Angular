@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import {  Users } from "../models/user.model";
 import { FormGroup } from "@angular/forms";
 import { AllPost, AllPosts, Posts } from "../models/post";
@@ -48,15 +48,23 @@ softDeletePost(id: number): Observable<any> {
   
 }
 public AddPost(formdata: any): Observable<any> {
-  const currentTimestamp = new Date().toISOString(); // Get current time
+  const currentTimestamp = new Date().toISOString().split('Z')[0]; // Remove 'Z' to avoid timezone
   const newPost = {
     ...formdata,
-    createdDate: currentTimestamp, // Assign created time
-    updatedAt: currentTimestamp,   // Assign update time initially
+    category: Number(formdata.category), // Convert category to number
+    createdDate: currentTimestamp, // Assign created time without timezone
+    updatedAt: currentTimestamp,   // Assign update time initially without timezone
   };
 
-  return this.http.post<any>(`${this.url}CreatePost`, newPost);
+  console.log("New Post Payload:", newPost);
+
+  return this.http.post<any>(`${this.url}CreatePost`, newPost).pipe(
+    tap((response: any) => console.log("API Response:", response)) // Log the actual response
+  );
 }
+
+
+
 
 public UpdatePost(id: number, post: any): Observable<any> {
   const updatedPost = {

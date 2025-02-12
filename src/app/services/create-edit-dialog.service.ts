@@ -10,7 +10,7 @@ export class CreateEditDialogService {
 
   openCreateDialog(): DynamicDialogRef {
     return this.dialogService.open(CreateEditComponent, {
-      header: 'Create New Post',
+      // header: 'Create New Post',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -19,7 +19,7 @@ export class CreateEditDialogService {
 
   openEditDialog(postId: number): DynamicDialogRef {
     return this.dialogService.open(CreateEditComponent, {
-      header: 'Edit Post',
+      // header: 'Edit Post',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,

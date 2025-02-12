@@ -18,9 +18,15 @@ import { FormGroup } from "@angular/forms";
     public url = environment.BaseURL+"User/";
     constructor(private http: HttpClient) { }
 
-    public GetAllUsers(): Observable<any> {
-        return this.http.get<any>(this.url + "FetchAllUsers"); // Fixed URL
+    // In your user-service.service.ts
+getAllUsers(search: string = '', filter: string = ''): Observable<any> {
+  return this.http.get<any>(`${this.url}FetchAllUsers`, {
+      params: {
+          search: search,
+          filter: filter
       }
+  });
+}
 
 
       public AddUser(userData: any): Observable<Users> {
@@ -28,6 +34,9 @@ import { FormGroup } from "@angular/forms";
       }
       public GetUserById(id: number): Observable<Users>{
         return this.http.get<Users>(this.url+"GetUserById/"+ id);
+    }
+    getUserIdByEmail(email: string): Observable<any> {
+      return this.http.get(`${this.url}email/${email}`);
     }
     public UpdateUser(id: number, formData: FormGroup): Observable<any> {
       // Use id directly to update the URL dynamically

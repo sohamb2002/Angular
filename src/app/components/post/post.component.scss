@@ -132,6 +132,13 @@ p-dropdown {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* PAGINATOR STYLING */
+p-paginator {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 /* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
   .button-container {

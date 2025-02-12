@@ -23,6 +23,7 @@ export interface AddUserResponse {
   }
   
   export interface Users {
+    data: Users;
     result: User[];  // List of users
     statusCode: number;
     errorMessage: string;

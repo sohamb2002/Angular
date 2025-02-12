@@ -50,6 +50,12 @@
           [value]="post.isPublished ? 'Published' : 'Not Published'">
         </p-tag>
 
+        <!-- User ID (Created By) with Custom Pink Severity -->
+        <p-tag 
+          class="pink-tag" 
+          [value]="'Created By: ' + post.createdBy">
+        </p-tag>
+
         <ng-template pTemplate="footer">
           <div class="flex gap-4 mt-1">
             <p-button label="Edit" severity="info" [outlined]="true" (click)="openEditDialog(post.id)"></p-button>
@@ -59,4 +65,15 @@
       </p-card>
     </div>
   </div>
-</div>  
+
+  <!-- Paginator -->
+  <div class="flex justify-center mt-6">
+    <p-paginator 
+      [first]="first" 
+      [rows]="rows" 
+      [totalRecords]="posts.length" 
+      (onPageChange)="onPageChange($event)"
+      [style]="{ 'width': '100%', 'justify-content': 'center' }">
+    </p-paginator>
+  </div>
+</div>

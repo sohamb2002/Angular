@@ -15,20 +15,33 @@
     </div>
     <!-- Conditionally render the category dropdown for create mode -->
     <div *ngIf="mode === 'create'">
-      <label for="categoryId">Category</label>
-      <select id="categoryId" formControlName="categoryId">
+      <label for="category">Category</label>
+      <select id="category" formControlName="category">
         <option *ngFor="let category of categories" [value]="category.value">
           {{ category.label }}
         </option>
       </select>
     </div>
     <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        (blur)="fetchUserIdByEmail(postForm.get('email')?.value)"
+        placeholder="Enter your email"
+      />
+      <div *ngIf="postForm.get('email')?.invalid && postForm.get('email')?.touched">
+        <small class="error">Please enter a valid email address</small>
+      </div>
+    </div>
+    <div>
       <label>Created At:</label>
-      <input type="text" [value]="postForm.value.createdDate | date:'short'" disabled />
+      <input type="text" [value]="postForm.get('createdDate')?.value | date:'short'" disabled />
     </div>
     <div>
       <label>Updated At:</label>
-      <input type="text" [value]="postForm.value.updatedAt | date:'short'" disabled />
+      <input type="text" [value]="postForm.get('updatedAt')?.value | date:'short'" disabled />
     </div>
     <button type="submit">{{ mode === 'create' ? 'Create' : 'Update' }}</button>
   </form>

@@ -48,15 +48,22 @@ export class EditUserComponent implements OnInit {
         name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
         phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Example 10-digit phone validation
-        password: ['', [Validators.required, Validators.minLength(6)]],
+       // password: ['', [Validators.required, Validators.minLength(6)]],
         isActive: [false, Validators.required], // Initialize to false, make it required
     });
 
 
     // Get the user ID from the route parameters
     this.route.paramMap.subscribe((params) => {
-      this.userId = +params.get('id')!; // Convert the ID to a number
-      this.loadUserData(this.userId); // Fetch the user data based on the ID
+      const encodedId = params.get('id');
+      if (encodedId) {
+        try {
+          this.userId = parseInt(atob(encodedId), 10); // Decode and parse ID
+          this.loadUserData(this.userId);
+        } catch (error) {
+          console.error('Error decoding user ID:', error);
+        }
+      } // Fetch the user data based on the ID
     });
   }
 
@@ -74,7 +81,7 @@ export class EditUserComponent implements OnInit {
           name: user.name || '',
           email: user.email || '',
           phone: user.phone || '',
-          password: '',  
+        //  password: '',  
           isActive: user.isActive ?? false 
         });
       },

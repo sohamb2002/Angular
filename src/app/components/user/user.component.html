@@ -9,9 +9,13 @@
   <!-- Toggle Buttons -->
   <div class="toggle-buttons">
     <button pButton type="button" label="Show All Users" class="p-button-sm p-button-secondary" 
-            (click)="toggleUserView()" *ngIf="!showAllUsers"></button>
+            (click)="toggleUserView('all')" ></button>
+  
     <button pButton type="button" label="Show Active Users" class="p-button-sm p-button-secondary" 
-            (click)="toggleUserView()" *ngIf="showAllUsers"></button>
+            (click)="toggleUserView('active')" ></button>
+  
+    <button pButton type="button" label="Show Inactive Users" class="p-button-sm p-button-secondary" 
+            (click)="toggleUserView('inactive')"></button>
   </div>
 
   <!-- PrimeNG Table -->

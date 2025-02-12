@@ -3,13 +3,16 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { PostService } from '../../services/post-service.service';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UserService } from '../../services/user-service.service';
+import * as bcrypt from 'bcryptjs';
+
 
 @Component({
   selector: 'app-create-edit',
   templateUrl: './create-edit.component.html',
   styleUrls: ['./create-edit.component.scss'],
   standalone: true,
-  providers: [DialogService],
+  providers: [DialogService,UserService],
   imports: [CommonModule, ReactiveFormsModule],
 })
 export class CreateEditComponent implements OnInit {
@@ -36,6 +39,7 @@ export class CreateEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
+    private userService: UserService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig
   ) {}
@@ -45,11 +49,15 @@ export class CreateEditComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       isPublished: [false],
-      categoryId: [null], // Add categoryId to the form group
-      createdAt: [null],  // Add createdAt field
-      updatedAt: [null]   // Add updatedAt field
+      category: [null],
+      createdBy: [null], // Auto-set this field
+      email: ['', [Validators.required, Validators.email]], // User inputs email
+      createdDate: [null],
+      updatedAt: [null]
     });
-
+  
+ 
+    
     // Get data passed to the dialog
     this.postId = this.config.data?.postId || null;
     this.mode = this.postId ? 'edit' : 'create';
@@ -58,13 +66,42 @@ export class CreateEditComponent implements OnInit {
       this.loadPostForEdit();
     } else {
       // Set createdAt and updatedAt for new posts
-      const now = new Date();
+      const now = new Date().toISOString().split('Z')[0]; // Removes the 'Z' at the end
+      console.log(now); // Example output: "2025-02-10T12:34:56.789"
+      
+
+      
       this.postForm.patchValue({
-        createdAt: now,
+        createdDate: now,
         updatedAt: now
+    
       });
+     
+      
     }
   }
+  fetchUserIdByEmail(email: string | null): void {
+   
+    if (!email) return;
+
+    this.userService.getUserIdByEmail(email).subscribe({
+      next: (response) => {
+        const userId = response?.id; // Directly accessing id from API response
+
+        if (userId) {
+          this.postForm.patchValue({ createdBy: userId });
+          console.log(`User ID ${userId} mapped for email: ${email}`);
+        } else {
+          console.warn('User not found for email:', email);
+        }
+      },
+      error: (error) => console.error('Error fetching user ID:', error),
+    });
+  }
+
+
+
+
 
   loadPostForEdit(): void {
     if (this.postId !== null) {
@@ -74,7 +111,7 @@ export class CreateEditComponent implements OnInit {
           title: post.title || '',
           description: post.description || '',
           isPublished: post.isPublished ?? false,
-          categoryId: post.categoryId || null,
+          category: post.category || null,
           createdAt: post.createdAt || new Date(),
           updatedAt: post.updatedAt || new Date()
         });

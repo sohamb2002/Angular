@@ -74,7 +74,7 @@
     background-color: #45a049;
   }
   /* Styling for the Category Dropdown */
-#categoryId {
+#category {
   width: 100%;
   padding: 10px;
   border: 2px solid #007bff; /* Blue border */
@@ -87,18 +87,18 @@
 }
 
 /* Hover effect */
-#categoryId:hover {
+#category:hover {
   border-color: #0056b3;
 }
 
 /* Focus effect */
-#categoryId:focus {
+#category:focus {
   border-color: #0056b3;
   box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
 }
 
 /* Dropdown options */
-#categoryId option {
+#category option {
   font-size: 14px;
   padding: 8px;
   background: #f8f9fa;
@@ -106,7 +106,7 @@
 }
 
 /* Label styling */
-label[for="categoryId"] {
+label[for="category"] {
   font-weight: bold;
   font-size: 16px;
   color: #222;

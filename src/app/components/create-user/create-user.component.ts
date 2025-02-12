@@ -11,7 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { MessageModule } from 'primeng/message';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-user',
@@ -33,7 +33,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 })
 export class CreateUserComponent implements OnInit {
   createUserForm!: FormGroup;
-   i:number=0;
+  i: number = 0;
+userid:number=37;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -48,13 +49,12 @@ export class CreateUserComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       isActive: [true]
     });
-  
+
     // Ensure the form starts as blank
     console.log('Form before reset:', this.createUserForm.value);
     this.createUserForm.reset();
     console.log('Form after reset:', this.createUserForm.value);
   }
-  
 
   onSubmit() {
     if (this.createUserForm.invalid) {
@@ -62,12 +62,33 @@ export class CreateUserComponent implements OnInit {
     }
 
     this.userService.AddUser(this.createUserForm.value).subscribe(
-      (response: Users) => {
+      (response: any) => {
         console.log('User created successfully', response);
-        this.router.navigate(['/User']);
+
+        const newUserId = response.data.id;
+        // Show SweetAlert2 notification
+        Swal.fire({
+          title: 'User Created!',
+          text: `User has been created with ID: ${newUserId}`,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.userid=this.userid+1;
+            this.router.navigate(['/User']);
+          }
+        });
       },
       (error) => {
         console.error('Error creating user', error);
+
+        // Show error notification
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while creating the user.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }
@@ -77,18 +98,14 @@ export class CreateUserComponent implements OnInit {
   }
 
   allowOnlyNumbers(event: KeyboardEvent): void {
+    this.i++;
+    console.log(this.i);
 
-   this.i++;
-   console.log(this.i);
-   
-if(this.i>=10)
-{
-  const charCode = event.which ? event.which : event.keyCode;
-  if (charCode < 48 || charCode > 57) {
-    event.preventDefault();
-  }
-}
-    
-    
+    if (this.i >= 10) {
+      const charCode = event.which ? event.which : event.keyCode;
+      if (charCode < 48 || charCode > 57) {
+        event.preventDefault();
+      }
+    }
   }
 }
